@@ -75,11 +75,10 @@ Option		GNU long option		Meaning
    do
     printf ' '
    done
-   if [[ -z "$READC" && "$RGOOD" ]]
+   if [ "$RGOOD" ]
    then
     break
    fi
-   RGOOD=""
   done
   printf '0\n'
   RGOOD=""
@@ -97,7 +96,7 @@ Option		GNU long option		Meaning
    do
     printf ' '
    done
-   if [[ -z "$READC" && "$RGOOD" ]]
+   if [ "$RGOOD" ]
    then
     break
    fi
