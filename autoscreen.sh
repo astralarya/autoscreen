@@ -21,9 +21,10 @@
 # source this file at the very END (important!)
 # of your shell's .*rc file
 
-if [ "$1" = "-h" -o "$1" = "--help" ]
-then
- echo "Usage: Source this script at the END of your .bashrc with:
+_autoscreen() {
+ if [ "$1" = "-h" -o "$1" = "--help" ]
+ then
+  echo "Usage: Source this script at the END of your .bashrc with:
 
   source </path/to/autoscreen.sh> HOSTNAME STARTWAIT EXITWAIT
 
@@ -33,62 +34,77 @@ Waits STARTWAIT seconds before start (default 2).
 Waits EXITWAIT seconds before exit (default 1).
 Option		GNU long option		Meaning
 -h		--help			Show this message"
- return 0
-fi
-
-if [ "$1" ]
-then
- MYTEST="$1"
-else
- MYTEST=""
-fi
-if [ "$2" ]
-then
- STARTWAIT="$2"
-else
- STARTWAIT=2
-fi
-if [ "$3" ]
-then
- EXITWAIT="$3"
-else
- EXITWAIT=1
-fi
-typeset -i i STARTWAIT
-typeset -i i EXITWAIT
-
-if [[ -z "$STY" && "$TERM" != "dumb" && -z "$MYTEST" || "$HOSTNAME" = $MYTEST ]]
-then
- printf "Starting screen. ^C to cancel... "
- # countdown
- for((i=STARTWAIT;i>0;i--))
- do
-  printf '%b' $i
-  sleep 1
-  LENGTH=${#i}
-  for((j=0;j<LENGTH;j++))
+  return 1
+ fi
+ 
+ if [ "$1" ]
+ then
+  local MYTEST="$1"
+ else
+  local MYTEST=""
+ fi
+ if [ "$2" ]
+ then
+  local STARTWAIT="$2"
+ else
+  local STARTWAIT=2
+ fi
+ if [ "$3" ]
+ then
+  local EXITWAIT="$3"
+ else
+  local EXITWAIT=1
+ fi
+ typeset -i i STARTWAIT
+ typeset -i i EXITWAIT
+ local READC
+ local RGOOD
+ local LENGTH
+ 
+ if [[ -z "$STY" && "$TERM" != "dumb" && -z "$MYTEST" || "$HOSTNAME" = $MYTEST ]]
+ then
+  printf "Starting screen. ^C to cancel... "
+  # countdown
+  for((i=STARTWAIT;i>0;i--))
   do
-   printf ' '
+   printf '%b' $i
+   read -rsd '\0' -N 1 -t 1 READC && RGOOD=1
+   LENGTH=${#i}
+   for((j=0;j<LENGTH;j++))
+   do
+    printf ' '
+   done
+   if [[ -z "$READC" && "$RGOOD" ]]
+   then
+    break
+   fi
   done
- done
- printf '0\n'
- # start screen session
- # clear screen
- screen -D -RR && clear &&
- echo "Screen terminated. Exiting. ^C to cancel..." &&
- # countdown
- for((i=EXITWAIT;i>0;i--))
- do
-  printf '%b' $i
-  sleep 1
-  LENGTH=${#i}
-  for((j=0;j<LENGTH;j++))
+  printf '0\n'
+  RGOOD=""
+  # start screen session
+  # clear screen
+  screen -D -RR && clear &&
+  echo "Screen terminated. Exiting. ^C to cancel..." &&
+  # countdown
+  for((i=EXITWAIT;i>0;i--))
   do
-   printf ' '
-  done
- done &&
- printf '0\n' &&
- # close shell or connection after successful execution
- exit
- # do not exit on error
-fi
+   printf '%b' $i
+   read -rsd '\0' -N 1 -t 1 READC && RGOOD=1
+   LENGTH=${#i}
+   for((j=0;j<LENGTH;j++))
+   do
+    printf ' '
+   done
+   if [[ -z "$READC" && "$RGOOD" ]]
+   then
+    break
+   fi
+  done &&
+  printf '0\n'
+ else
+  return 1
+ fi
+}
+# close shell or connection after successful execution
+_autoscreen "$@" && exit
+# do not exit on error
