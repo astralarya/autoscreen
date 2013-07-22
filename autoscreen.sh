@@ -23,11 +23,11 @@
 
 if [ "$1" = "-h" -o "$1" = "--help" ]
 then
- echo "Usage: template-autoscreen [HOSTNAME]
-Output code to automatically start a GNU screen
-session without inception.
-Optionally, check whether hostname = HOSTNAME
-before starting.
+ echo "Usage: source </path/to/autoscreen.sh> HOSTNAME STARTWAIT EXITWAIT
+Automatically start a GNU screen session without inception.
+If HOSTNAME is not empty, check that \$HOSTNAME = HOSTNAME before starting (wildcards allowed).
+Waits STARTWAIT seconds before start (default 2). 
+Waits EXITWAIT seconds before exit (default 1).
 Option		GNU long option		Meaning
 -h		--help			Show this message"
  return 0
@@ -47,12 +47,12 @@ else
 fi
 if [ "$3" ]
 then
- ENDWAIT="$3"
+ EXITWAIT="$3"
 else
- ENDWAIT=1
+ EXITWAIT=1
 fi
 
-if [[ -z "$STY" && "$TERM" != "dumb" && -z "$MYTEST" || "$HOSTNAME" = "$MYTEST" ]]
+if [[ -z "$STY" && "$TERM" != "dumb" && -z "$MYTEST" || "$HOSTNAME" = $MYTEST ]]
 then
  echo "Starting screen. ^C to cancel..."
  sleep "$STARTWAIT"
@@ -61,6 +61,6 @@ then
  # close shell or connection after termination
  clear
  echo "Screen terminated. Exiting. ^C to cancel..."
- sleep "$ENDWAIT"
+ sleep "$EXITWAIT"
  exit
 fi
