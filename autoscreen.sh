@@ -35,7 +35,7 @@ fi
 
 if [ "$1" ]
 then
- MYTEST="\"\$HOSTNAME\" = $1 &&"
+ MYTEST="$1"
 else
  MYTEST=""
 fi
@@ -52,7 +52,7 @@ else
  ENDWAIT=1
 fi
 
-if [[ $MYTEST -z "$STY" && "$TERM" != "dumb" ]]
+if [[ -z "$STY" && "$TERM" != "dumb" && -z "$MYTEST" || "$HOSTNAME" = "$MYTEST" ]]
 then
  echo "Starting screen. ^C to cancel..."
  sleep "$STARTWAIT"
