@@ -7,7 +7,7 @@
 
 Source `autoscreen.sh` at the very **END** of your .\*rc file.
 
-  source </path/to/autoscreen.sh> HOSTNAME STARTWAIT EXITWAIT
+    source </path/to/autoscreen.sh> HOSTNAME STARTWAIT EXITWAIT
 
 Automatically start a GNU screen session without inception.
 If HOSTNAME is not empty, check that \$HOSTNAME = HOSTNAME before starting (wildcards allowed).
