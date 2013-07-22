@@ -21,8 +21,6 @@
 # source this file at the very end (important!)
 # of your shell's .*rc file
 
-function template-autoscreen {
-
 if [ "$1" = "-h" -o "$1" = "--help" ]
 then
  echo "Usage: template-autoscreen [HOSTNAME]
@@ -37,23 +35,32 @@ fi
 
 if [ "$1" ]
 then
- local MYTEST="\"\$HOSTNAME\" = $1 &&"
+ MYTEST="\"\$HOSTNAME\" = $1 &&"
 else
- local MYTEST=""
+ MYTEST=""
+fi
+if [ "$2" ]
+then
+ STARTWAIT="$2"
+else
+ STARTWAIT=2
+fi
+if [ "$3" ]
+then
+ ENDWAIT="$3"
+else
+ ENDWAIT=1
 fi
 
-cat << TEMPLATE
-if [[ $MYTEST -z "\$STY" && "\$TERM" != "dumb" ]]
+if [[ $MYTEST -z "$STY" && "$TERM" != "dumb" ]]
 then
  echo "Starting screen. ^C to cancel..."
- sleep 2
+ sleep "$STARTWAIT"
  # start screen session
  screen -D -RR
  # close shell or connection after termination
  clear
  echo "Screen terminated. Exiting. ^C to cancel..."
- sleep 1
+ sleep "$ENDWAIT"
  exit
 fi
-TEMPLATE
-} # template-autoscreen 
