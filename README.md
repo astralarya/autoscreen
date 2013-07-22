@@ -19,3 +19,4 @@ When you start your shell, you will be notified that you are about to enter a sc
 When your screen session ends, you will be notified that your shell will exit (^C to cancel).  
 You can skip the countdown with ENTER.  
 
+For help using GNU screen see the [GNU screen manual](http://www.gnu.org/software/screen/manual/screen.html).
