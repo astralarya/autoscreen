@@ -62,7 +62,7 @@ Option		GNU long option		Meaning
  local RGOOD
  local LENGTH
  
- if [[ -z "$STY" && "$TERM" != "dumb" && -z "$MYTEST" || "$HOSTNAME" = $MYTEST ]]
+ if [[ -z "$STY" && "$TERM" != "dumb" && (-z "$MYTEST" || "$HOSTNAME" = $MYTEST) ]]
  then
   printf "Starting screen. ^C to cancel... "
   # countdown
