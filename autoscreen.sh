@@ -18,7 +18,7 @@
 
 
 ### USAGE ###
-# source this file at the very end (important!)
+# source this file at the very END (important!)
 # of your shell's .*rc file
 
 if [ "$1" = "-h" -o "$1" = "--help" ]
