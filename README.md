@@ -1,6 +1,6 @@
 # autoscreen
 
-**autoscreen** - Automatically start screen without inception
+**autoscreen** - Automatically start GNU screen without inception
 
 
 ## Installation
