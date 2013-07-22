@@ -48,13 +48,13 @@ Option		GNU long option		Meaning
  then
   local STARTWAIT="$2"
  else
-  local STARTWAIT=2
+  local STARTWAIT=3
  fi
  if [ "$3" ]
  then
   local EXITWAIT="$3"
  else
-  local EXITWAIT=1
+  local EXITWAIT=2
  fi
  typeset -i i STARTWAIT
  typeset -i i EXITWAIT
