@@ -60,10 +60,11 @@ then
  echo "Starting screen. ^C to cancel..."
  sleep "$STARTWAIT"
  # start screen session
- screen -D -RR
- # close shell or connection after termination
- clear
- echo "Screen terminated. Exiting. ^C to cancel..."
- sleep "$EXITWAIT"
+ # clear screen and close shell or connection
+ # after successful execution
+ screen -D -RR && clear &&
+ echo "Screen terminated. Exiting. ^C to cancel..." &&
+ sleep "$EXITWAIT" &&
  exit
+ # do not exit on error
 fi
