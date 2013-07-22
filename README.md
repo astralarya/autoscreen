@@ -25,4 +25,5 @@ For help using GNU screen see the [GNU screen manual](http://www.gnu.org/softwar
 
 * bash
 * screen
+* printf
 * clear
