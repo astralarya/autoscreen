@@ -24,16 +24,17 @@
 _autoscreen() {
  if [ "$1" = "-h" -o "$1" = "--help" ]
  then
-  echo "Usage: Source this script at the END of your .bashrc with:
+  printf 'Usage: Source this script at the END of your .bashrc with:
 
-  source </path/to/autoscreen.sh> HOSTNAME STARTWAIT EXITWAIT
+  source /path/to/autoscreen.sh [HOSTNAME] [STARTWAIT] [EXITWAIT]
 
 Automatically start a GNU screen session without inception.
-If HOSTNAME is not empty, check that \$HOSTNAME = HOSTNAME before starting (wildcards allowed).
+If HOSTNAME is not empty, check that $HOSTNAME = HOSTNAME before starting (wildcards allowed).
 Waits STARTWAIT seconds before start (default 2). 
 Waits EXITWAIT seconds before exit (default 1).
 Option		GNU long option		Meaning
--h		--help			Show this message"
+-h		--help			Show this message
+'
   return 1
  fi
  
@@ -85,7 +86,7 @@ Option		GNU long option		Meaning
   # start screen session
   # clear screen
   screen -D -RR && clear &&
-  echo "Screen terminated. Exiting. ^C to cancel..." &&
+  printf "Screen terminated. Exiting. ^C to cancel... " &&
   # countdown
   for((i=EXITWAIT;i>0;i--))
   do
