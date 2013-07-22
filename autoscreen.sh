@@ -78,6 +78,7 @@ Option		GNU long option		Meaning
    then
     break
    fi
+   RGOOD=""
   done
   printf '0\n'
   RGOOD=""
@@ -99,6 +100,7 @@ Option		GNU long option		Meaning
    then
     break
    fi
+   RGOOD=""
   done &&
   printf '0\n'
  else
