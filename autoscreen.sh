@@ -59,14 +59,19 @@ typeset -i i EXITWAIT
 
 if [[ -z "$STY" && "$TERM" != "dumb" && -z "$MYTEST" || "$HOSTNAME" = $MYTEST ]]
 then
- printf "Starting screen. ^C to cancel...  "
+ printf "Starting screen. ^C to cancel... "
  # countdown
  for((i=STARTWAIT;i>0;i--))
  do
-  printf '%b' $i
+  printf '%b' $i
   sleep 1
+  LENGTH=${#i}
+  for((j=0;j<LENGTH;j++))
+  do
+   printf ' '
+  done
  done
- printf '0\n'
+ printf '0\n'
  # start screen session
  # clear screen
  screen -D -RR && clear &&
@@ -74,10 +79,15 @@ then
  # countdown
  for((i=EXITWAIT;i>0;i--))
  do
-  printf '%b' $i
+  printf '%b' $i
   sleep 1
+  LENGTH=${#i}
+  for((j=0;j<LENGTH;j++))
+  do
+   printf ' '
+  done
  done &&
- printf '0\n' &&
+ printf '0\n' &&
  # close shell or connection after successful execution
  exit
  # do not exit on error
