@@ -23,7 +23,10 @@
 
 if [ "$1" = "-h" -o "$1" = "--help" ]
 then
- echo "Usage: source </path/to/autoscreen.sh> HOSTNAME STARTWAIT EXITWAIT
+ echo "Usage: Source this script at the END of your .bashrc with:
+
+  source </path/to/autoscreen.sh> HOSTNAME STARTWAIT EXITWAIT
+
 Automatically start a GNU screen session without inception.
 If HOSTNAME is not empty, check that \$HOSTNAME = HOSTNAME before starting (wildcards allowed).
 Waits STARTWAIT seconds before start (default 2). 
