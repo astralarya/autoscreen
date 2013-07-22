@@ -9,9 +9,9 @@ Source `autoscreen.sh` at the very **END** of your .\*rc file.
 
     source /path/to/autoscreen.sh [HOSTNAME] [STARTWAIT] [EXITWAIT]
 
-If HOSTNAME is not empty, check that $HOSTNAME = HOSTNAME before starting (wildcards allowed).  
-Waits STARTWAIT seconds before starting screen (default 2).   
-Waits EXITWAIT seconds before exiting the shell after screen terminates (default 1).  
+If *HOSTNAME* is not empty, check that $HOSTNAME = *HOSTNAME* before starting (wildcards allowed).  
+Waits *STARTWAIT* seconds before starting screen (default 2).   
+Waits *EXITWAIT* seconds before exiting the shell after screen terminates (default 1).  
 
 ## Usage
 
