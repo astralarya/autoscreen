@@ -106,6 +106,7 @@ Option		GNU long option		Meaning
  else
   return 1
  fi
+ exit
 }
 # close shell or connection after successful execution
-autoscreen "$@" && exit
+autoscreen "$@"
