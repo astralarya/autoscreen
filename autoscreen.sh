@@ -21,7 +21,7 @@
 # source this file at the very END (important!)
 # of your shell's .*rc file
 
-_autoscreen() {
+autoscreen() {
  if [ "$1" = "-h" -o "$1" = "--help" ]
  then
   printf 'Usage: Source this script at the END of your .bashrc with:
@@ -108,5 +108,4 @@ Option		GNU long option		Meaning
  fi
 }
 # close shell or connection after successful execution
-_autoscreen "$@" && exit
-# do not exit on error
+autoscreen "$@" && exit
