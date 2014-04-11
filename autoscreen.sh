@@ -114,7 +114,7 @@ Option		GNU long option		Meaning
 # interactive screen start
 autoscreen () {
  screen -D -RR && clear &&
- printf "Screen terminated."
+ printf "Screen terminated.\n"
 }
 
 # start autoscreen on source
